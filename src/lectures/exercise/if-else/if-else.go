@@ -6,12 +6,6 @@
 //  and `else`.
 //
 //--Requirements:
-//* Use the accessGranted() and accessDenied() functions to display
-//  informational messages
-//* Access at any time: Admin, Manager
-//* Access weekends: Contractor
-//* Access weekdays: Member
-//* Access Mondays, Wednesdays, and Fridays: Guest
 
 package main
 
@@ -37,6 +31,10 @@ const (
 	Guest      = 50
 )
 
+func weekday(day int) bool {
+	return day <= 4
+}
+
 func accessGranted() {
 	fmt.Println("Granted")
 }
@@ -48,7 +46,22 @@ func accessDenied() {
 func main() {
 	// The day and role. Change these to check your work.
 	today, role := Tuesday, Guest
+	//* Use the accessGranted() and accessDenied() functions to display
+	//  informational messages
+	//* Access at any time: Admin, Manager
+	if role == Admin || role == Manager {
+		//* Access weekends: Contractor
+		accessGranted()
+	} else if role == Contractor && !weekday(today) {
+		accessGranted()
+	} else if role == Member && weekday(today) {
+		//* Access weekdays: Member
+		accessGranted()
+	} else if role == Guest && today == Monday || today == Wednesday || today == Friday {
+		//* Access Mondays, Wednesdays, and Fridays: Guest
+		accessGranted()
+	} else {
+		accessDenied()
+	}
 
-	accessGranted()
 }
-
