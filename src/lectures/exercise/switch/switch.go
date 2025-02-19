@@ -14,7 +14,7 @@ package main
 import "fmt"
 
 func main() {
-	switch age := 23; {
+	switch age := 8; {
 	//  - "newborn" when age is 0
 	case age == 0:
 		fmt.Println("newborn")
