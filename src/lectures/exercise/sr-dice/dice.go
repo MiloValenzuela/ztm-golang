@@ -25,9 +25,8 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
-
-	"golang.org/x/exp/rand"
 )
 
 func roll(sides int) int {
@@ -38,7 +37,7 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	dice, sides := 2, 12
-	rolls := 1
+	rolls := 2
 
 	for r := 1; r <= rolls; r++ {
 		sum := 0
@@ -51,7 +50,17 @@ func main() {
 		fmt.Println("Total rolled", sum)
 		switch sum := sum; {
 		case sum == 2 && dice == 2:
-
+			// - "Snake eyes": when the total roll is
+			fmt.Println("Snake Eyes!")
+		case sum == 7:
+			// - "Lucky 7": when the total roll is 7
+			fmt.Println("Lucky 7")
+		case sum%2 == 0:
+			// - "Even": when the total roll is even
+			fmt.Println("Even")
+		case sum%2 == 1:
+			// - "Odd": when the total roll is odd
+			fmt.Println("Odd")
 		}
 	}
 }
