@@ -18,7 +18,49 @@ package main
 
 import "fmt"
 
-func main() {
+const (
+	Active   = true
+	Inactive = false
+)
 
+type SecurityTag bool
+
+// * Create a structure to store items and their security tag state
+type Item struct {
+	name string
+	tag  SecurityTag
 }
 
+func activate(tag *SecurityTag) {
+	*tag = Active
+}
+
+func deactivate(tag *SecurityTag) {
+	*tag = Inactive
+}
+
+// * Create a checkout() function which can deactivate all tags in a slice
+func checkout(items []Item) {
+	fmt.Println("checking out...")
+	for i := 0; i < len(items); i++ {
+		deactivate(&items[i].tag)
+	}
+}
+
+func main() {
+	//  - Create at least 4 items, all with active security tags
+	shirt := Item{"Shirt", Active}
+	pants := Item{"Pants", Active}
+	purse := Item{"Purse", Active}
+	watch := Item{"Watch", Active}
+
+	items := []Item{shirt, pants, purse, watch}
+	fmt.Println("Initial", items)
+
+	//  - Deactivate any one security tag in the array/slice
+	deactivate(&items[0].tag)
+	fmt.Println("Item 0 deasctivated", items)
+
+	checkout(items)
+	fmt.Println("checked out", items)
+}
