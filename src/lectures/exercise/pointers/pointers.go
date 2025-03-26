@@ -18,6 +18,24 @@ package main
 
 import "fmt"
 
+func main() {
+	//  - Create at least 4 items, all with active security tags
+	shirt := Item{"Shirt", Active}
+	pants := Item{"Pants", Active}
+	purse := Item{"Purse", Active}
+	watch := Item{"Watch", Active}
+
+	items := []Item{shirt, pants, purse, watch}
+	fmt.Println("Initial", items)
+
+	//  - Deactivate any one security tag in the array/slice
+	deactivate(&items[0].tag)
+	fmt.Println("Item 0 deasctivated", items)
+
+	checkout(items)
+	fmt.Println("checked out", items)
+}
+
 const (
 	Active   = true
 	Inactive = false
@@ -45,22 +63,4 @@ func checkout(items []Item) {
 	for i := 0; i < len(items); i++ {
 		deactivate(&items[i].tag)
 	}
-}
-
-func main() {
-	//  - Create at least 4 items, all with active security tags
-	shirt := Item{"Shirt", Active}
-	pants := Item{"Pants", Active}
-	purse := Item{"Purse", Active}
-	watch := Item{"Watch", Active}
-
-	items := []Item{shirt, pants, purse, watch}
-	fmt.Println("Initial", items)
-
-	//  - Deactivate any one security tag in the array/slice
-	deactivate(&items[0].tag)
-	fmt.Println("Item 0 deasctivated", items)
-
-	checkout(items)
-	fmt.Println("checked out", items)
 }
