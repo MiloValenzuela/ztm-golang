@@ -19,9 +19,37 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func main() {
-
+type Vehicle struct {
+	Type  string
+	Model string
 }
 
+func directToLift(vehicle Vehicle) {
+	switch vehicle.Type {
+	case "Motorcycle":
+		fmt.Printf("Directing Motorcycle '%s' to small lift\n", vehicle.Model)
+	case "Car":
+		fmt.Printf("Directing Car '%s' to standard lift\n", vehicle.Model)
+	case "Truck":
+		fmt.Printf("Directing Truck '%s' to large lift\n", vehicle.Model)
+	default:
+		fmt.Printf("Unknown vehicle type '%s' for model '%s'\n", vehicle.Type, vehicle.Model)
+	}
+}
+
+func main() {
+	vehicle := []Vehicle{
+		{Type: "Motorcycle", Model: "Ducati Monster"},
+		{Type: "Car", Model: "Toyota Corolla"},
+		{Type: "Truck", Model: "Jeeb Wangler"},
+		{Type: "Bicycle", Model: "Speedster 5000"},
+	}
+
+	for _, v := range vehicle {
+		directToLift(v)
+	}
+}
